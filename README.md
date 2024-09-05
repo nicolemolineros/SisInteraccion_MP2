@@ -14,4 +14,22 @@ The game leverages **OpenAL** to provide spatialized sound effects, adding an im
 - Spatialized sounds to enhance immersion.
 - Multiple narrative acts that guide the player through different parts of the dungeon.
 
+### Clean Code Principles:
+The project is structured using **Clean Code** principles to ensure that the code is not only functional but also easy to read, maintain, and expand in the future.
+
+**Justification:**
+
+- **Python** was chosen for its clear and easy-to-use syntax, allowing for rapid development and a focus on game logic without additional complications. Its extensive libraries and community support facilitated integration and code management.
+
+- **OpenAL** was selected for its ability to create spatial audio, adding an extra dimension to the player's experience. This makes sound effects more realistic and enhances immersion. OpenAL’s cross-platform compatibility ensures consistent audio performance across different operating systems.
+
+Together, Python and OpenAL offer an effective combination of development simplicity and sophisticated audio features, resulting in an engaging and maintainable game.
+
+
+
+
+
+
+
+
 
