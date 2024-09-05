@@ -17,7 +17,7 @@ The game leverages **OpenAL** to provide spatialized sound effects, adding an im
 ### Clean Code Principles:
 The project is structured using **Clean Code** principles to ensure that the code is not only functional but also easy to read, maintain, and expand in the future.
 
-**Justification:**
+### Justification:**
 
 - **Python** was chosen for its clear and easy-to-use syntax, allowing for rapid development and a focus on game logic without additional complications. Its extensive libraries and community support facilitated integration and code management.
 
