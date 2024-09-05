@@ -17,6 +17,64 @@ class Enemy:
         self.health = health
         self.attack = attack
 
+def play_sound(filename, lado=0):
+    """Reproduce un archivo de sonido.
+        lado = 1 -> derecha
+        lado = 0 -> centro
+        lado = -1 -> izquierda
+    """	
+    source = oalOpen("audio.wav")
+    if source is None:
+        print("Failed to load audio file.")
+        oalQuit()
+        exit(1)
+    source.set_position([0, 0, 0])
+    source.play()
+    listener = Listener()
+    listener.set_position([0, 0, 0])
+    try:
+        source.set_position([lado, 0, 0])
+        sleep(1)
+    finally:
+        source.stop()
+        
+
+def sonido_muerte_bruja():
+    play_sound("sonidos/muerte_bruja.wav")
+
+def sonido_muerte_goblin():
+    play_sound("sonidos/muerte_goblin.wav")
+
+def sonido_muerte_dragón():
+    play_sound("sonidos/muerte_dragon.wav")
+
+def sonido_muerte_monstruo():
+    play_sound("sonidos/muerte_monstruo.wav")
+
+def sonido_victoria():
+    play_sound("sonidos/victoria.wav")
+
+def sonido_derrota():
+    play_sound("sonidos/derrota.wav")
+
+def sonido_curar():
+    play_sound("sonidos/curar.wav")
+
+def sonido_atacar():
+    play_sound("sonidos/atacar.wav")
+
+def sonido_ataque_fallido():
+    play_sound("sonidos/ataque_fallido.wav")
+
+def sonido_ataque_dragon():
+    play_sound("sonidos/ataque_dragon.wav")
+
+def sonido_ataque_bruja():
+    play_sound("sonidos/ataque_bruja.wav")
+
+def sonido_ataque_goblin():
+    play_sound("sonidos/ataque_goblin.wav")
+
 def print_status(player, enemy):
     print(f"\nTu vida: {player.health}")
     print(f"Vida de {enemy.name}: {enemy.health}")
@@ -37,25 +95,29 @@ def combat(player : Player, enemy):
                 damage = player.attack
                 enemy.health -= damage
                 print(f"¡Atacas al {enemy.name} y le haces {damage} de daño!")
+                sonido_atacar()
             else:
                 print("Fallas el ataque.")
+                sonido_ataque_fallido()
         elif choice == '2':
-            heal = random.randint(0, player.max_health // 6)
+            heal = random.randint(0, player.max_health//6)
             player.health = min(player.health + heal, player.max_health)
             print(f"Te curas {heal} puntos de vida.")
+            sonido_curar()
         else:
             print("Opción no válida. Pierdes tu turno.")
         
         if enemy.health <= 0:
             print(f"¡Has derrotado al {enemy.name}!")
             if enemy.name == "Monstruo Terrible":
-                pass
+                sonido_muerte_monstruo()
             elif enemy.name == "Goblin":
-                pass
+                sonido_muerte_goblin()
             elif enemy.name == "Bruja":
-                pass
+                sonido_muerte_bruja()
             elif enemy.name == "Dragón Feroz":
-                pass
+                sonido_muerte_dragón()
+            sonido_victoria()
             return "victory"
         
         # Turno del enemigo
@@ -63,19 +125,20 @@ def combat(player : Player, enemy):
         player.health -= enemy_damage
         print(f"El {enemy.name} te ataca y te hace {enemy_damage} de daño.")
         if enemy.name == "Dragón Feroz":
-            pass
+            sonido_ataque_dragon()
         elif enemy.name == "Bruja":
-            pass
+            sonido_ataque_bruja()
         elif enemy.name == "Goblin":
-            pass
+            sonido_ataque_goblin()
     
     if player.health <= 0:
         print("Has sido derrotado...")
+        sonido_derrota()
         return "defeat"
 
 def inicio(player : Player):
     print("\n--- ACTO I: EL INICIO ---")
-    print("Te adentras en la oscura mazmorra en busca de la princesa.")
+    print("Te adentras en la oscura mansión en busca de la princesa.")
     print("Un terrible monstruo aparece ante ti.")
     
     enemigo_fuerte = Enemy("Monstruo Terrible", 15, 3)
@@ -92,7 +155,7 @@ def inicio(player : Player):
 
 def nudo_1(player : Player):
     print("\n--- ACTO II: EL NUDO PARTE 1 ---")
-    print("Te adentras más en la mazmorra, determinado a rescatar a la princesa.")
+    print("Te adentras más en la mansión, determinado a rescatar a la princesa.")
     
     enemigo_debil = Enemy("Goblin", 6, 1)
     resultado = combat(player, enemigo_debil)
@@ -119,6 +182,7 @@ def nudo_2(player : Player):
         print("Te tomas la pocion y recuperas todos tus puntos de vida.")
         player.health = player.max_health
         print(f"Tu vida ha aumentado a {player.health}.")
+        sonido_curar()
         return True
     else:
         print("Has sido derrotado por la bruja. Tu aventura termina aquí.")
@@ -152,12 +216,14 @@ def desenlace_2():
     print("La princesa te lleva a su reino y te da una recompensa")
     print("La recompensa es casarte con ella y ser el rey de su reino")
 
+    sonido_victoria()
     return True
 
 def main_game_loop():
     nombre = input("Ingresa el nombre de tu héroe: ")
     player = Player(nombre, health=15, attack=2)
-    print(f"Bienvenido, {player.name}. Tu misión es rescatar a la princesa de la terrible mazmorra.")
+    print(f"Bienvenido, {player.name}. Tu misión es rescatar a la princesa de que se encuentra encerrada hace quince años en una mansión abandonada llena de monstruos y criaturas.")
+    sonido_muerte_bruja()
     if inicio(player):
         if nudo_1(player):
             if nudo_2(player):
@@ -167,6 +233,5 @@ def main_game_loop():
 
     print(f"Gracias por jugar {player.name}.")
     oalQuit()
-
 if __name__ == "__main__":
     main_game_loop()
