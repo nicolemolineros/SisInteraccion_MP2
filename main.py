@@ -297,7 +297,7 @@ def desenlace_2():
     
     return True
 
-def main_game_loop():
+def princess_rescue():
     clear_console()
     nombre = input("Ingresa el nombre de tu héroe: ")
     player = Player(nombre, health=15, attack=2)
@@ -315,4 +315,4 @@ def main_game_loop():
     oalQuit()
 
 if __name__ == "__main__":
-    main_game_loop()
+    princess_rescue()
