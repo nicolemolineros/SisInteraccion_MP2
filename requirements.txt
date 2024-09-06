@@ -1,0 +1,7 @@
+altgraph==0.17.4
+colorama==0.4.6
+packaging==24.1
+pefile==2024.8.26
+pyinstaller-hooks-contrib==2024.8
+PyOpenAL==0.7.11a1
+pywin32-ctypes==0.2.3

@@ -25,7 +25,18 @@ The project is structured using **Clean Code** principles to ensure that the cod
 
 Together, Python and OpenAL offer an effective combination of development simplicity and sophisticated audio features, resulting in an engaging and maintainable game.
 
+### Before start playing:
 
+Before you start playing this amazing game, please make sure you have installed everything to let the magic happen!
+
+1. Ensure that you have installed **OpenAL** on your system.
+2. Clone this repository.
+3. Ensure to install the requirements.
+
+`python -m venv .venv`
+`source .venv/bin/activate`
+`pip install -r requirements.txt`
+`python main.py`
 
 
 
